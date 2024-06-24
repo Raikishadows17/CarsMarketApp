@@ -1,0 +1,124 @@
+/* Estilo para el color de fondo de la página */
+body {
+    background-color: #f2f2f2; /* Color de fondo gris claro */
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Estilo para el encabezado */
+header {
+    background-color: #333; /* Color de fondo negro para el encabezado */
+    color: #fff; /* Color de texto blanco para el encabezado */
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Estilo para la navegación */
+nav ul {
+    background-color: #333; /* Color de fondo negro para la barra de navegación */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff; /* Color de texto blanco para los enlaces de navegación */
+}
+
+/* Estilo para el contenido principal */
+main {
+    padding: 20px;
+}
+
+/* Estilos para la galería de imágenes y el visor de imagen ampliada */
+.division {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.image-container {
+    margin: 10px;
+    padding: 10px;
+    background-color: #fff; /* Color de fondo blanco para los contenedores de imagen */
+    border: 1px solid #ddd; /* Borde gris claro alrededor de los contenedores de imagen */
+    text-align: center;
+    cursor: pointer;
+}
+
+.image-container h3 {
+    margin: 10px 0;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Estilo para el cuadro de búsqueda */
+.search-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#search {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#search-button {
+    background-color: #3498db; /* Color de fondo azul para el botón de búsqueda */
+    color: #fff; /* Color de texto blanco para el botón de búsqueda */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#search-button:hover {
+    background-color: #2980b9; /* Cambia el color del botón al pasar el cursor sobre él */
+}
+
+/* Estilo para el pie de página */
+footer {
+    background-color: #333; /* Color de fondo negro para el pie de página */
+    color: #fff; /* Color de texto blanco para el pie de página */
+    text-align: center;
+    padding: 10px 0;
+}
+/* Estilos para la navegación */
+nav ul {
+    background-color: #333; /* Color de fondo negro para la barra de navegación */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente los elementos */
+    align-items: center; /* Centrar verticalmente los elementos */
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff; /* Color de texto blanco para los enlaces de navegación */
+}
+
+/* Estilo para el ícono de referencia */
+nav ul li i {
+    font-size: 24px;
+    color: #fff; /* Color de texto blanco para el ícono */
+    margin-left: 10px; /* Espacio entre el último enlace y el ícono */
+}
