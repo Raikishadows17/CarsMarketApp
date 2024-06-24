@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+       <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+    <p>Para un mejor servicio, proporciona datos reales.</p>
+    <ion-item>
+      <ion-label position=floating>Nombre(s)</ion-label>
+      <ion-input type="text" [(ngModel)]="usuario.nombre" [(ngModel)]="user.displayName"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position=floating>Apellidos</ion-label>
+      <ion-input type="text" [(ngModel)]="usuario.Apellidos"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position=floating>Numero de telefono</ion-label>
+      <ion-input type="number" [(ngModel)]="usuario.ntelefono" maxlength="10"></ion-input>
+     
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position=floating>Correo electronico</ion-label>
+      <ion-input type="text" [(ngModel)]="user.email"></ion-input>
+    </ion-item>              
+    
+    <ion-item>
+      <ion-label position=floating>Contraseña (Minimo 6 caracteres)</ion-label>
+      <ion-input type="password" [(ngModel)]="user.password"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position=floating>Confirma la contraseña</ion-label>
+      <ion-input type="password" [(ngModel)]="usuario.passwordconfirm"></ion-input>
+    </ion-item>
+  
+  <br>
+  <ion-button (click)="registrar(user)">Registrame</ion-button>
+
+
+</ion-content>

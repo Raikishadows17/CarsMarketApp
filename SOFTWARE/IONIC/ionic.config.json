@@ -1,0 +1,7 @@
+{
+  "name": "carsmarket",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

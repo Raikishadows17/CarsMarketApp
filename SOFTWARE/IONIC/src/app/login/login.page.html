@@ -1,0 +1,48 @@
+<ion-header >
+  
+</ion-header>
+
+<ion-content padding class="background" >
+
+  <div class="centrado">
+    <img style="width:230px; height:230px;" src="../../assets/imgs/icon.png" >
+  </div>
+  <ion-item ñines="none" class="transparent-background">
+    <ion-label position=floating  color="light">Correo Electronico</ion-label>
+    <ion-input type="text" [(ngModel)]="user.email"  color="light"></ion-input>
+  </ion-item>              
+  
+  <ion-item class="transparent-background"  >
+    <ion-label position=floating  color="light">Contraseña</ion-label>
+    <ion-input type="password" [(ngModel)]="user.password"  color="light"></ion-input>
+  </ion-item>
+
+  <div class="centrado">
+    <ion-button (click)="recupcontra()" fill=clear  color="light">¿Olvidaste tu contraseña?</ion-button>
+  </div>
+  <br>
+
+  <ion-button (click)="login(user)" type="submit" expand="block">Iniciar Sesión</ion-button>
+
+<div class="centrado">
+  <ion-button  (click)="registrar()" fill=clear  color="light">¿No tienes cuenta? Registrate</ion-button>
+  
+
+</div>
+
+<br>
+
+
+<br>
+<!-- Botón visible solo para administradores-->
+<ion-button (click)="accionAdmin()" type="submit" expand="block">Administrador</ion-button>
+
+<!--
+<ion-button expand="block" (click)="loginGoogle()" color="danger" *ngIf="!isGoogleLogin">
+  <ion-icon slot="start" name="logo-google"></ion-icon>
+  LogIn with Google
+</ion-button>
+-->
+
+  
+</ion-content>
