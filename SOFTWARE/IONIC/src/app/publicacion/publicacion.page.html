@@ -1,0 +1,131 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>{{Carro.Marca}} {{Carro.Modelo}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <img [src]= Carro.Foto width=50px align="center">
+      <p *ngIf="Carro.Foto==null">No hay imagen del Automovil disponible</p>
+      <!--Realidadd Aumentada API-->
+      <!--<ion-button  *ngIf="Carro.RA=='true'" (click)="openWithSystemBroser('https://play.google.com/store/apps/details?id=com.ar.augment')">
+        <ion-icon   slot="start" name="camera"></ion-icon> <!--"openWithSystemBroser('https://carsmarket-webar.glitch.me/) 
+        Realidad Aumentada
+      </ion-button>-->
+      <ion-button *ngIf="Carro.RA=='true'" (click)= "openWithSystemBroser('https://clammy-star-decimal.glitch.me/')">
+        <ion-icon  slot="start" name="images"></ion-icon>
+        Imagenes Target para usar RA
+      </ion-button>
+     
+    <ion-card-content>
+
+      <ion-card-title>
+        <h2 class="posision">{{Carro.Marca}} ({{Carro.Estado}})</h2>
+        </ion-card-title>
+
+        <p class="posision"><b>Modelo: </b> {{Carro.Modelo}}</p>
+        <p class="posision">{{Carro.Cilindraje}} Cilindros</p>
+        <p class="posision"><b>Transmisión: </b> {{Carro.Transmicion}}</p>
+        <p class="posision"><b>Años de Adeudo: </b> {{Carro.AdeuAnu}}</p>
+        <p class="posision"><b>Precio: </b> $ {{Carro.Precio}}</p>
+        <p class="posision"><b>Kilometraje: </b> {{Carro.Kilometraje}} KM</p>
+        <p class="posittion"><b>Sistema de climatización: </b> {{Carro.Clima}}</p>
+        <p class="posision"><b>Descripcion: </b> {{Carro.Descripcion}}</p>
+        <p *ngIf="Carro.address" class="posision"><b>Dirección: </b> {{Carro.address}}</p>
+        <p *ngIf="Carro.Calif != 'No existe calificacion'" class="posision"><b>Calificación: </b> {{Carro.Calif}}/5 <ion-icon name="star"></ion-icon></p>
+        <p *ngIf="Carro.Calif == 'No existe calificacion'" class="posision"><b>Calificación: </b> {{Carro.Calif}} </p>  
+        <P *ngIf="Carro.RA=='true'"><b>ESTA PUBLICACIÓN CUENTA CON REALIDAD AUMENTADA</b></P>
+      <hr/>
+      <!-- QUITAR COMENTARIOS SI SE LLEGASE A OCUPAR-->
+      <ion-item *ngIf="Carro.Vendedor != this.usuario">
+        <ion-label>Calificame</ion-label>
+        <!--<ion-input type="number" [(ngModel)]="Carro.Cilindraje"></ion-input>-->
+        <ion-select [(ngModel)]="Carro.Count" interface="popover" size=small>
+          <ion-select-option value="1">1 Estrella (Pésimo)</ion-select-option>
+          <ion-select-option value="2">2 Estrellas (Malo)</ion-select-option>
+          <ion-select-option value="3">3 Estrellas (Regular)</ion-select-option>
+          <ion-select-option value="4">4 Estrellas (Bueno)</ion-select-option>
+          <ion-select-option value="5">5 Estrellas (Excelente)</ion-select-option>
+        </ion-select>   
+                     
+      </ion-item>  
+      <ion-button *ngIf="Carro.Vendedor != this.usuario" (click)="Calificar_Car(Carro.Count,Carro.IdCarro)">Calificar</ion-button>  
+    </ion-card-content>
+  </ion-card>
+  <diV class="user">
+    <ion-card>
+      <ion-card-header>
+        <b>Informacion del usuario</b>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <p><b>Nombre:</b> {{Carro.VNombre}} {{Carro.VApellidos}}</p>
+        <p><b>Numero de telefono:</b> {{Carro.VTelefono}}</p>
+        <p><b>Email:</b> {{Carro.VEmail }}</p>
+        <hr/>
+      
+        
+   
+      
+      </ion-card-content>
+    </ion-card>
+  </diV>  
+  <hr/>
+  
+
+
+ <div class="center">
+  <ion-card>
+    <ion-button *ngIf="Carro.Coordenadas=='true'" expand="block" fill="outline" [routerLink]="['/maps/',Carro.latitud, Carro.longitud]">Ubicacion del Automovil</ion-button>
+    <ion-button expand="block" fill="outline" (click)="callTel(Carro.VTelefono)">Llamar</ion-button>
+    
+    <!--<ion-button expand="block" fill="outline">Chat</ion-button>-->
+  </ion-card>
+ </div>
+
+  
+
+ <ion-card>
+  <ion-card-header>
+    <ion-icon name="chatbubbles"></ion-icon>
+    <b>Crear Comentario</b>
+  </ion-card-header>
+
+  <ion-item>
+    <ion-label position=floating>Comentario</ion-label>
+    <ion-input type="text" [(ngModel)]="Comentarios.coment"></ion-input>
+  </ion-item>  
+  <ion-button (click)="agregarComentario()">Publicar</ion-button>
+  </ion-card>
+
+<ion-content>
+  <ion-card-header>
+    <ion-icon name="chatbubbles"></ion-icon>
+    <b>Comentarios creados</b>
+  </ion-card-header>
+
+  <ion-card>
+    <ion-col *ngFor="let Coment of Comentarios">
+     <ion-card>
+      <ion-card-content>
+        <ion-card-title>
+          <h2 class = "position">{{Coment.Nombre}} {{Coment.Apellidos}}</h2>
+        </ion-card-title>
+        <p><b>Comento:</b> {{Coment.Coment}}</p>
+      </ion-card-content>
+      <ion-item>
+        <ion-icon name="trash" slot="end"  *ngIf="Coment.Vendedor == this.usuario" (click)="eliminarComentario(Coment.IdComentario)"></ion-icon>
+      </ion-item>
+     </ion-card>
+    </ion-col>
+  </ion-card>
+</ion-content>
+
+
+
+
+</ion-content>

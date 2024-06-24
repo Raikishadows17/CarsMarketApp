@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="primary">
+     <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+     </ion-buttons>
+   <ion-title>Actualizar información</ion-title>
+ </ion-toolbar>
+</ion-header>
+<ion-content padding>
+
+  <ion-list>
+    <ion-item>
+        <ion-label position=floating>Marca</ion-label>
+        <ion-input type="text" [(ngModel)]="Carro.Marca"></ion-input>
+     </ion-item>
+     <ion-item>
+        <ion-label position=floating>Modelo</ion-label>
+        <ion-input type="number" [(ngModel)]="Carro.Modelo"></ion-input>
+     </ion-item>
+     <ion-item>
+        <ion-label position=floating>Precio</ion-label>
+        <ion-input type="number" [(ngModel)]="Carro.Precio"></ion-input>
+     </ion-item>
+     <ion-item>
+      <ion-label position=floating>Kilometraje</ion-label>
+      <ion-input type="number" [(ngModel)]="Carro.Kilometraje"></ion-input>
+   </ion-item>
+   <ion-item>
+    <ion-label position=floating>Descripcion</ion-label>
+    <ion-input type="text" [(ngModel)]="Carro.Descripcion"></ion-input>
+ </ion-item>
+     <br>
+<ion-button ion-button (click)="Actualizar(Carro.Marca,Carro.Modelo,Carro.Precio,Carro.Kilometraje,Carro.Descripcion)" clear>Actualizar</ion-button>
+<ion-button ion-button (click)="Cancelar()" clear>Cancelar</ion-button>
+</ion-list>
+</ion-content>

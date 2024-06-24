@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Subir Video para Realidad Aumentada</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/autoventa"></ion-back-button>
+    </ion-buttons>    
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div class="centrado">
+    <ion-button (click)="takeVideo()">Grabar Video</ion-button>
+
+    <ion-button (click)="addVideo()">Seleccionar Video de la Galeria</ion-button>
+ 
+  </div>
+
+  <div class="centrado">
+  <video controls autoplay #myvideo>
+  </video>
+</div>
+  <div class="centrado">
+    <ion-button   (click)= "openWithSystemBroser('https://drive.google.com/drive/folders/1F4K8oIC4tM1Uw45KuLfYVCIDtX1oTYRB')">
+      <ion-icon   slot="start" name="document"></ion-icon>
+      Subir Archivo
+    </ion-button>
+
+  </div>
+  
+</ion-content>

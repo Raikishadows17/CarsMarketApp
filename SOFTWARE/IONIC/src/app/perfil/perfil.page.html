@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-button slot="start" color="light" fill="clear" (click)=OpenMenu()>
+          <ion-icon name="menu" slot="icon-only"></ion-icon>
+      </ion-button>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-list>
+       <div align-center> <img  class="tamaño" src="assets/imgs/perfil.png" (click)="CambiarFoto()" *ngIf="usuario.Perfil == null">
+        <ion-card *ngFor="let usuario of usuarios">
+            <img  class="tamaño" [src]=usuario.Perfil *ngIf="usuario.Perfil != null" (click)="CambiarFoto()">
+        </ion-card>
+      </div>
+        <div  *ngFor="let usuario of usuarios">  
+        <p><b>Nombre:</b> {{usuario.Nombre}} {{usuario.Apellidos}}</p>
+        
+        <p><b>Número de teléfono:</b> {{usuario.Telefono}}</p>
+      
+        <p><b>Email:</b> {{usuario.Email }}</p>
+        </div> 
+    </ion-list>
+      
+      <ion-button (click)="Editar()" fill=clear>Editar información de usuario</ion-button>
+      <ion-button (click)="GoToVentas()" fill=clear>Mis ventas</ion-button>
+
+</ion-content>

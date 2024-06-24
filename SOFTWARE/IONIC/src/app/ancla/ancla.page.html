@@ -1,0 +1,25 @@
+
+<ion-header>
+    <ion-toolbar color="dark">
+      <ion-title>Nuevo Carro</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+
+
+<ion-content>
+    <ion-button (click)="Galeria()" fill=outline><ion-icon name="image" ></ion-icon>cargar imagen</ion-button>
+    
+    <ion-button (click)="upload()" fill=outline><ion-icon name="image" ></ion-icon>subir imagen</ion-button>
+    
+    <img [src]=foto width=50px align="center">
+      <p *ngIf="foto==null">No hay imagen disponible</p>
+    <br>
+
+    <ion-button (click)="getPhoto()" fill=outline><ion-icon name="image" ></ion-icon>descargar imagen</ion-button>
+    <img [src]=foto2 width=50px align="center">
+      <p *ngIf="foto==null">No hay imagen disponible</p>
+    <br>
+
+</ion-content>

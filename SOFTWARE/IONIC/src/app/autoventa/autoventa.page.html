@@ -1,0 +1,209 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-button slot="start" color="light" fill="clear" (click)=OpenMenu()>
+          <ion-icon name="menu" slot="icon-only"></ion-icon>
+      </ion-button>
+
+      <ion-segment [(ngModel)]="Tipo">
+          <ion-segment-button value="Auto">
+            Automóvil
+          </ion-segment-button>
+          <ion-segment-button value="Moto">
+            Motocicleta
+          </ion-segment-button>
+        </ion-segment>
+
+       <ion-button slot="end" color="light" fill="clear" (click)=NewCar()>
+          <ion-icon name="add" slot="icon-only" size="small"></ion-icon>
+       </ion-button>
+       <ion-button slot="end" color="light" fill="clear" (click)=help_ra() class=no.padding>
+        <ion-icon name="help" slot="icon-only" size = small></ion-icon>
+       </ion-button>
+   </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+<div *ngIf="Carros">
+  <div [ngSwitch]="Tipo"> 
+     
+       <div  *ngSwitchCase="'Auto'">
+
+        <div  *ngFor="let Car of Carros">   
+        <ion-card *ngIf="Car.Tipo == 'Auto'">
+          <img [src]=Car.Foto width=50px align="center">
+          <p *ngIf="Car.Foto==null">No hay imagen del Auto disponible</p>
+
+          
+        <ion-card-content>
+
+          <ion-card-title>
+            
+            <h2 class="posision">{{Car.Marca}} ({{Car.Estado}})</h2>
+            
+            </ion-card-title>
+            <p class="posision"><b>Modelo: </b> {{Car.Modelo}}</p>
+            <p class="posision">{{Car.Cilindraje}} Cilindros</p>
+            <p class="posision"><b>Transmisión: </b> {{Car.Transmicion}}</p>
+            <p class="posision"><b>Años de Adeudo: </b> {{Car.AdeuAnu}}</p>
+            <p class="posision"><b>Precio: </b> ${{Car.Precio}}</p>
+            <p class="position"><b>Kilometraje: </b> {{Car.Kilometraje}} KM</p>
+            <p class="posittion"><b>Sistema de climatización: </b> {{Car.Clima}}</p>
+            <p class="posision"><b>Descripcion: </b> {{Car.Descripcion}}</p>
+            <p *ngIf="Car.address" class="posision"><b>Dirección: </b> {{Car.address}}</p>
+            <P *ngIf="Car.RA=='true'"><b>ESTA PUBLICACIÓN CUENTA CON REALIDAD AUMENTADA</b></P>
+            <P *ngIf="Car.RA=='Proceso'"><b>SOLICITUD DE R.A. PENDIENTE, FAVOR DE GRABAR EL VIDEO</b></P>
+            <P *ngIf="Car.RA=='Procesando'"><b>SOLICITUD DE R.A. PENDIENTE, FAVOR DE SUBIR EL VIDEO QUE ACABA DE GRABAR</b></P>
+            <P *ngIf="Car.RA=='EnTramite'"><b>FAVOR DE ESPERAR, UN ADMIN ESTA TRABAJANDO EN EL DESARROLLO DEL RA</b></P>
+
+        </ion-card-content>
+    
+        <ion-row>
+            <ion-col>
+              <ion-button fill=clear size=small (click)='Vendido(Car.IdCarro)'>
+                <ion-icon name="pricetag"></ion-icon>
+                <div>Vendido</div>
+              </ion-button>
+            </ion-col>
+      
+            <ion-col>
+              <ion-button *ngIf="Car.RA=='false'" fill=clear size=small (click)='IMRA(Car.IdCarro,Car.RA)'>
+                <div>Implementar R.A.</div>
+              </ion-button>
+            </ion-col>
+            <ion-col>
+              
+        
+             
+              <ion-button  *ngIf="Car.RA=='Proceso'" fill=clear size=small (click) = "takeVideo(Car.IdCarro)">
+                <ion-icon name="videocam"></ion-icon>
+                <!--<ion-icon name="videocam"></ion-icon>-->
+                <div>Grabar Video</div>
+
+              </ion-button>
+
+              <ion-button  *ngIf="Car.RA=='Procesando'" fill=clear size=small   (click)= "openWithSystemBroser('https://drive.google.com/drive/folders/1pVF6sFCs-XSpAJT-zs7EP0vXJfJ9AO75')">
+                <ion-icon   slot="start" name="document"></ion-icon>
+                Subir Archivo
+              </ion-button>
+              <ion-button *ngIf="Car.RA=='Procesando'" fill=clear size=small  (click)=SubioVideo(Car.IdCarro)>
+                <ion-icon name="help" slot="start" ></ion-icon>
+                Usted  ya subio el Video?
+               </ion-button>
+               
+              
+            </ion-col>
+      
+            <ion-col>
+              <ion-button fill=clear size=small (click)='Eliminar(Car.IdCarro,Car.RA)'>
+                <ion-icon name="trash"></ion-icon>
+                <div>Eliminar</div>
+              </ion-button>                
+            </ion-col>
+            <ion-col>
+              <ion-button  fill=clear size=small  [routerLink]="['/editautos', Car.IdCarro]">
+                <ion-icon name="create"></ion-icon>
+                <!--[routerLink]="['/publicacion',Car.IdCarro]"-->
+                <div>Editar información del Auto</div>
+              </ion-button>
+            </ion-col>
+            <ion-col>                              
+                <ion-button *ngIf="Car.Coordenadas=='false'" fill=clear size=small (click)='alertConfirmUbicacion(Car.IdCarro)'>
+                  <ion-icon name="locate"></ion-icon>
+                  <div>Proporcionar Ubicación</div> 
+                </ion-button>          
+            </ion-col>
+        </ion-row>
+         
+      </ion-card>
+    </div>
+    </div> 
+    
+        <div  *ngSwitchCase="'Moto'">
+  
+      <div  *ngFor="let Car of Carros"> 
+    
+      <ion-card *ngIf="Car.Tipo == 'Moto'">
+          <img [src]=Car.Foto width=50px align="center">
+          <p *ngIf="Car.Foto==null">No hay imagen del Auto disponible</p>
+        <ion-card-content>
+          <ion-card-title>
+            <h2 class="posision">{{Car.Marca}} ({{Car.Estado}})</h2>
+            </ion-card-title>
+            <p class="posision"><b>Modelo: </b> {{Car.Modelo}}</p>
+            <!--<p class="posision">{{Car.Cilindraje}} Cilindros</p>-->
+            <p class="posision"><b>Transmisión: </b> {{Car.Transmicion}}</p>
+            <p class="posision"><b>Años de Adeudo: </b> {{Car.AdeuAnu}}</p>
+            <p class="posision"><b>Precio: </b> ${{Car.Precio}}</p>
+            <p class="posision"><b>Kilometraje: </b> {{Car.Kilometraje}} KM</p>
+            <p class="posittion"><b>Sistema de climatización: </b> {{Car.Clima}}</p>
+            <p class="posision"><b>Descripcion: </b> {{Car.Descripcion}}</p>
+            <p *ngIf="Car.address" class="posision"><b>Dirección: </b> {{Car.address}}</p>
+            <P *ngIf="Car.RA=='true'"><b>ESTA PUBLICACIÓN CUENTA CON REALIDAD AUMENTADA</b></P>
+            <P *ngIf="Car.RA=='Proceso'"><b>SOLICITUD DE R.A. PENDIENTE, FAVOR DE GRABAR EL VIDEO</b></P>
+            <P *ngIf="Car.RA=='Procesando'"><b>SOLICITUD DE R.A. PENDIENTE, FAVOR DE SUBIR EL VIDEO QUE ACABA DE GRABAR</b></P>
+        </ion-card-content>
+      
+        <ion-row>
+            <ion-col>
+              <ion-button fill=clear size=small (click)='Vendido(Car.IdCarro)'>
+                <ion-icon name="pricetag"></ion-icon>
+                <div>Vendido</div>
+              </ion-button>
+            </ion-col>
+      
+            <ion-col>                              
+              <ion-button  *ngIf="Car.RA=='false'"  fill=clear size=small (click)='IMRA(Car.IdCarro,Car.RA)'>
+                <div>Implementar R.A.</div>
+              </ion-button>          
+            </ion-col>
+            <ion-col>
+              <ion-button  *ngIf="Car.RA=='Proceso'" fill=clear size=small (click)= "takeVideo(Car.IdCarro)">
+                <ion-icon name="videocam"></ion-icon>
+                <!--<ion-icon name="videocam"></ion-icon>-->
+                <div>Grabar Video</div>
+
+              </ion-button>
+             
+
+              <ion-button  *ngIf="Car.RA=='Procesando'" fill=clear size=small   (click)= "openWithSystemBroserMoto('https://drive.google.com/drive/folders/13A67Hcl0_sbnqakHLLsJIsFHsJyQk1Ss')">
+                <ion-icon   slot="start" name="document"></ion-icon>
+                Subir Archivo
+              </ion-button>
+              <ion-button *ngIf="Car.RA=='Procesando'" fill=clear size=small  (click)=SubioVideo(Car.IdCarro)>
+                <ion-icon name="help" slot="start" ></ion-icon>
+                Usted ya subio el Video?
+               </ion-button>
+              
+            </ion-col>
+      
+            <ion-col>
+              <ion-button fill=clear size=small (click)='Eliminar(Car.IdCarro,Car.RA)'>
+                <ion-icon name="trash"></ion-icon>
+                <div>Eliminar</div>
+              </ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button  fill=clear size=small  [routerLink]="['/editautos', Car.IdCarro]">
+                <ion-icon name="create"></ion-icon>
+                <!--[routerLink]="['/publicacion',Car.IdCarro]"-->
+                <div>Editar información del Auto</div>
+              </ion-button>
+            </ion-col>
+            <ion-col>                              
+                <ion-button *ngIf="Car.Coordenadas=='false'" fill=clear size=small (click)='alertConfirmUbicacion(Car.IdCarro)'>
+                  <ion-icon name="locate"></ion-icon>
+                  <div>Proporcionar Ubicación</div> 
+                </ion-button>          
+            </ion-col>
+
+        </ion-row>
+        
+      </ion-card>
+    </div>
+    </div>
+  </div>
+    
+    <br>      
+  </div>
+</ion-content>

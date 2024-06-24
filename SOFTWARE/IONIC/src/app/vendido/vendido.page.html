@@ -1,0 +1,155 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+       </ion-buttons>
+    <!--<ion-title>Mis Ventas</ion-title>-->
+    <ion-segment [(ngModel)]="Tipo">
+        <ion-segment-button value="Auto">
+          Automóvil
+        </ion-segment-button>
+        <ion-segment-button value="Moto">
+          Motocicleta
+        </ion-segment-button>
+      </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+    <div [ngSwitch]="Tipo">
+
+        <ion-list *ngSwitchCase="'Auto'">
+
+  <ion-label *ngIf="filtro == 'Fecha'">Selecciona la fecha</ion-label>
+
+  <ion-item *ngIf="filtro == 'Fecha'">
+    <ion-label>Mes</ion-label>
+    <ion-select [(ngModel)] = Mes interface="popover">
+      <ion-select-option value="1">Enero</ion-select-option>
+      <ion-select-option value="2">Febrero</ion-select-option>
+      <ion-select-option value="3">Marzo</ion-select-option>
+      <ion-select-option value="4">Abril</ion-select-option>
+      <ion-select-option value="5">Mayo</ion-select-option>
+      <ion-select-option value="6">Junio</ion-select-option>
+      <ion-select-option value="7">Julio</ion-select-option>
+      <ion-select-option value="8">Agosto</ion-select-option>
+      <ion-select-option value="9">Septiembre</ion-select-option>
+      <ion-select-option value="10">Octubre</ion-select-option>
+      <ion-select-option value="11">Noviembre</ion-select-option>
+      <ion-select-option value="12">Diciembre</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="filtro == 'Fecha'">
+    <ion-label>Año</ion-label>
+    <ion-select [(ngModel)] = Year interface="popover">
+      <ion-select-option value="2022">2022</ion-select-option>
+      <ion-select-option value="2021">2021</ion-select-option>
+      <ion-select-option value="2020">2020</ion-select-option>
+      <ion-select-option value="2019">2019</ion-select-option>
+      <ion-select-option value="2018">2018</ion-select-option>
+      <ion-select-option value="2017">2017</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-button *ngIf="filtro == 'Fecha'" size=small fill=clear (click)=Filtro()>Filtrar</ion-button>
+
+
+    <br>
+    <ion-label>Total de todas las ventas:${{Tvendido}}</ion-label><br>
+    <ion-label *ngIf="filtro == 'Ninguna'">Suma de las publicaciones activas:${{TvendidoAcAuto}}</ion-label><br>
+    <ion-label  *ngIf="Mes && Year">Total en ventas en la fecha "{{Mes}}/{{Year}}":${{TvendidoMesAuto}}</ion-label>
+    
+    <ion-list>    
+      <div *ngFor="let Car of autosV" >
+        <div *ngIf="Car.Tipo == 'Auto'">
+          <ion-card  *ngIf="Car.Estado=='Vendido'">
+            <img [src]=Car.Foto width=50px align="center">
+            <p *ngIf="Car.Foto==null">No hay imagen del Automovil disponible</p>
+          <ion-card-content>
+            <ion-card-title>
+              <h2 class="posision">{{Car.Marca}}</h2>
+              </ion-card-title>
+              <p class="posision"><b>Modelo: </b> {{Car.Modelo}}</p>
+              <p class="posision"><b>Precio: </b> ${{Car.Precio}}</p>
+              <p class="posision"><b>Descripcion: </b> {{Car.Descripcion}}</p>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+
+        </ion-list>
+
+      </ion-list>
+
+      <ion-list *ngSwitchCase="'Moto'">
+
+          <ion-label *ngIf="filtro == 'Fecha'">Selecciona la fecha</ion-label>
+        
+          <ion-item *ngIf="filtro == 'Fecha'">
+            <ion-label>Mes</ion-label>
+            <ion-select [(ngModel)] = Mes interface="popover">
+              <ion-select-option value="1">Enero</ion-select-option>
+              <ion-select-option value="2">Febrero</ion-select-option>
+              <ion-select-option value="3">Marzo</ion-select-option>
+              <ion-select-option value="4">Abril</ion-select-option>
+              <ion-select-option value="5">Mayo</ion-select-option>
+              <ion-select-option value="6">Junio</ion-select-option>
+              <ion-select-option value="7">Julio</ion-select-option>
+              <ion-select-option value="8">Agosto</ion-select-option>
+              <ion-select-option value="9">Septiembre</ion-select-option>
+              <ion-select-option value="10">Octubre</ion-select-option>
+              <ion-select-option value="11">Noviembre</ion-select-option>
+              <ion-select-option value="12">Diciembre</ion-select-option>
+            </ion-select>
+          </ion-item>
+        
+          <ion-item *ngIf="filtro == 'Fecha'">
+            <ion-label>Año</ion-label>
+            <ion-select [(ngModel)] = Year interface="popover">
+              <ion-select-option value="2022">2022</ion-select-option>
+              <ion-select-option value="2021">2021</ion-select-option>
+              <ion-select-option value="2020">2020</ion-select-option>
+              <ion-select-option value="2019">2019</ion-select-option>
+              <ion-select-option value="2018">2018</ion-select-option>
+              <ion-select-option value="2017">2017</ion-select-option>
+            </ion-select>
+          </ion-item>
+        
+          <ion-button *ngIf="filtro == 'Fecha'" size=small fill=clear (click)=Filtro()>Filtrar</ion-button>
+        
+        
+            <br>
+            <ion-label>Total de todas las ventas:${{Tvendido}}</ion-label><br>
+            <ion-label *ngIf="filtro == 'Ninguna'">Suma de las publicaciones activas:${{TvendidoAcMoto}}</ion-label><br>
+            <ion-label  *ngIf="Mes && Year">Total en ventas en la fecha "{{Mes}}/{{Year}}":${{TvendidoMesMoto}}</ion-label>
+            
+            <ion-list>    
+              <div *ngFor="let Car of autosV" >
+                <div *ngIf="Car.Tipo == 'Moto'">
+                  <ion-card  *ngIf="Car.Estado=='Vendido'">
+                    <img [src]=Car.Foto width=50px align="center">
+                    <p *ngIf="Car.Foto==null">No hay imagen del Automovil disponible</p>
+                  <ion-card-content>
+                    <ion-card-title>
+                      <h2 class="posision">{{Car.Marca}}</h2>
+                      </ion-card-title>
+                      <p class="posision"><b>Modelo: </b> {{Car.Modelo}}</p>
+                      <p class="posision"><b>Precio: </b> ${{Car.Precio}}</p>
+                      <p class="posision"><b>Descripcion: </b> {{Car.Descripcion}}</p>
+                  </ion-card-content>
+                </ion-card>
+              </div>
+            </div>
+            
+                </ion-list>
+        
+              </ion-list>
+
+
+
+
+    </div> 
+
+</ion-content>

@@ -1,0 +1,43 @@
+<ion-app>
+  <ion-split-pane>
+
+  <ion-menu side='start' id="menu" menuId="menu" swipeGesture='false'>
+      <ion-header >
+          <ion-toolbar  color=primary>
+          <div *ngIf="usuario" >
+            <ion-grid class="Usuario">
+                  <ion-row>
+                    <ion-col size=3>                     
+                        <img class="tamaño" src="../assets/imgs/perfil.png" *ngIf="!usuario.Perfil">
+                        <img  class="tamaño" [src]=usuario.Perfil *ngIf="usuario.Perfil">
+                    </ion-col>
+                    <ion-col size=9>
+                        <br>
+                        <br>
+                        &nbsp;&nbsp;{{usuario.Nombre}} {{usuario.Apellidos}}<br>
+                        &nbsp;&nbsp;{{usuario.Email }}
+                    </ion-col>
+                  </ion-row>
+                </ion-grid> 
+              </div>    
+          </ion-toolbar>
+      </ion-header>
+      
+      <ion-content>          
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+          <ion-item ion-item [routerDirection]="'root'" [routerLink]="[p.url]" > 
+              {{p.title}} 
+          </ion-item>
+        </ion-menu-toggle>
+        <br>
+        <ion-item (click)="cerrarsession()" >
+            Cerrar Sesion
+        </ion-item>
+
+      </ion-content>
+  </ion-menu>
+
+
+  <ion-router-outlet main></ion-router-outlet>
+</ion-split-pane>
+</ion-app>
