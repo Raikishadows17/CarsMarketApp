@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CarsMarket AR</title>
+    <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
+    <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <script>
+      // We're going to register a custom event listener through a-frame that will fire
+      // whenever a marker has entered the camera view and is found through ar.js
+      AFRAME.registerComponent("registerevents", {
+        init: function () {
+          var marker = this.el;
+
+          // Element emits events when found and lost
+          marker.setAttribute("emitevents", "true");
+
+          marker.addEventListener("markerFound", function () {
+            // Alright, a marker has been found. Let's get the video element
+            var vid = document.getElementById("nissanVideo");
+
+            // Make sure that the video a-frame object is visible
+            document.querySelector("#nissan").setAttribute("visible", true);
+
+            // Reset the video to the beginning and play it through
+            vid.currentTime = 0;
+            vid.play();
+
+            // Once the video has completed, we're going to hide the a-video element
+            // which will display the a-image element with the watch behind it
+            marker.addEventListener("ended", function (e) {
+              document.querySelector("#nissan").setAttribute("visible", false);
+            });
+          });
+          marker.addEventListener("markerFound", function () {
+            var vid1 = document.getElementById("yamahaVideo");
+
+            document.querySelector("#yamaha").setAttribute("visible", true);
+
+            vid1.currentTime = 0;
+            vid1.play();
+
+            marker.addEventListener("ended", function (e) {
+              document.querySelector("#yamaha").setAttribute("visible", false);
+            });
+          });
+
+          marker.addEventListener("markerFound", function () {
+            var vid1 = document.getElementById("pruebaVideo");
+
+            document.querySelector("#prueba").setAttribute("visible", true);
+
+            vid1.currentTime = 0;
+            vid1.play();
+
+            marker.addEventListener("ended", function (e) {
+              document.querySelector("#prueba").setAttribute("visible", false);
+            });
+          });
+        },
+      });
+    </script>
+  </head>
+  <body>
+    <a-scene
+      embedded
+      arjs="debugUIEnabled:false;"
+      vr-mode-ui="enabled: false"
+      artoolkit=""
+    >
+      <a-assets timeout="10000">
+        <video
+          id="nissanVideo"
+          loop="false"
+          autoplay="false"
+          src="https://cdn.glitch.global/3f355bb5-4189-4fe3-9d54-d98ba87183f1/VideoNissan.mp4?v=1664828150418"
+          preload="auto"
+        ></video>
+
+        <video
+          id="yamahaVideo"
+          loop="false"
+          autoplay="false"
+          src="https://cdn.glitch.me/3f355bb5-4189-4fe3-9d54-d98ba87183f1/VideoMoto.mp4?v=1664982549979"
+          preload="auto"
+        ></video>
+
+        <video
+          id="pruebaVideo"
+          loop="false"
+          autoplay="false"
+          src="https://cdn.glitch.global/3f355bb5-4189-4fe3-9d54-d98ba87183f1/VideoNissan.mp4?v=1664828150418"
+          preload="auto"
+        ></video>
+      </a-assets>
+      <a-marker
+        type="pattern"
+        url="https://raw.githubusercontent.com/Raikishadows17/carsmarket/main/assets/marcadores/Nissan2010/Nissan2010.patt"
+        registerevents
+      >
+        <a-video
+          id="nissan"
+          src="#nissanVideo"
+          scale="1 1 1"
+          position="0 0 0"
+          rotation="270 0 0"
+          autoplay="false"
+        ></a-video>
+      </a-marker>
+
+      <a-marker
+        type="pattern"
+        url="https://raw.githubusercontent.com/Raikishadows17/carsmarket/main/assets/marcadores/Yamaha2010/marker.patt"
+        registerevents
+      >
+        <a-video
+          id="yamaha"
+          src="#yamahaVideo"
+          scale="1 1 1"
+          position="0 0 0"
+          rotation="270 0 0"
+          autoplay="false"
+        ></a-video>
+      </a-marker>
+
+      <a-marker
+        type="pattern"
+        url="https://raw.githubusercontent.com/Raikishadows17/carsmarket/main/assets/marcadores/pattern-IMG-20221104-WA0014.patt"
+        registerevents
+      >
+        <a-video
+          id="prueba"
+          src="#pruebaVideo"
+          scale="1 1 1"
+          position="0 0 0"
+          rotation="270 0 0"
+          autoplay="false"
+        ></a-video>
+      </a-marker>
+      <a-entity camera></a-entity>
+    </a-scene>
+  </body>
+</html>
